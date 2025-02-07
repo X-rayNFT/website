@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const containers = document.querySelectorAll('.image-container');
     let currentIndex = 0;
 
+    // Function to update navigation buttons
+    const updateNavButtons = () => {
+        prevButton.style.display = currentIndex === 0 ? 'none' : 'flex';
+        nextButton.style.display = currentIndex === containers.length - 1 ? 'none' : 'flex';
+    };
+
+    // Initial button state
+    updateNavButtons();
+
     // Set up scroll handling for each container
     containers.forEach((container, index) => {
         const xrayCover = container.querySelector('.xray-cover');
@@ -22,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 left: currentIndex * (600 + 20), // container width + gap
                 behavior: 'smooth'
             });
+            updateNavButtons();
         }
     });
 
@@ -32,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 left: currentIndex * (600 + 20), // container width + gap
                 behavior: 'smooth'
             });
+            updateNavButtons();
         }
     });
 
