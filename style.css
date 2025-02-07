@@ -59,52 +59,19 @@ header, .content, footer {
     justify-content: center;
     padding: 40px;
     margin: 20px 0;
-    overflow: hidden; /* Changed to hidden to contain content */
+    overflow: visible;
 }
 
 .content {
     position: relative;
     display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
     gap: 40px;
     padding: 20px 0;
-    width: 400px; /* Changed to single container width */
+    width: 1280px;
     flex-shrink: 0;
-    margin: 0 auto; /* Center the content */
-}
-
-.nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #000000;
-    color: white;
-    border: 2px solid white;
-    padding: 15px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 24px;
-    z-index: 1000; /* Increased z-index */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    outline: none;
-    opacity: 1; /* Ensure buttons are visible */
-    pointer-events: auto; /* Ensure buttons are clickable */
-}
-
-.prev-button {
-    left: calc(50% - 600px); /* Position relative to center */
-}
-
-.next-button {
-    right: calc(50% - 600px); /* Position relative to center */
+    margin: 0 auto;
+    transition: transform 0.3s ease; /* Smooth transition for container movement */
+    transform-style: preserve-3d; /* Prevent layout shifts */
 }
 
 .image-container {
@@ -115,6 +82,58 @@ header, .content, footer {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, opacity 0.5s ease; /* Smoother opacity transition */
+    opacity: 0.5;
+}
+
+/* Active container */
+.image-container.active {
+    opacity: 1;
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+/* New class for side containers when scrolling */
+.image-container.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #000000;
+    color: white;
+    border: 2px solid white;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease; /* Add transition for smooth fade */
+}
+
+/* Add class for hiding buttons */
+.nav-button.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.prev-button {
+    left: 40px;
+}
+
+.next-button {
+    right: 40px; /* Increased distance from edge */
 }
 
 /* Hide scrollbar but keep functionality */
@@ -185,5 +204,83 @@ footer {
     background: #333;
     transform: translateY(-50%) scale(1.1);
     transition: all 0.2s ease;
+}
+
+.description-container {
+    position: fixed;
+    /* Responsive positioning */
+    left: max(40px, calc(50% - 800px)); /* At least 40px from left edge */
+    top: 50%;
+    transform: translateY(-50%);
+    /* Responsive width */
+    width: min(300px, calc(50vw - 460px)); /* Shrink width on narrow screens */
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 25px;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    z-index: 2001;
+    border-radius: 10px;
+    pointer-events: none;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+}
+
+.description-container h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+.description-container p {
+    margin: 8px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+.description-container .metadata {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.description-container .bid {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #00ff00;
+}
+
+/* Remove the active container relation */
+.description-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Remove duplicate prev-button rule */
+.prev-button {
+    left: 40px;
+}
+
+/* Adjust text size for smaller widths */
+@media (max-width: 1400px) {
+    .description-container {
+        font-size: 14px;
+        padding: 20px;
+    }
+    
+    .description-container h2 {
+        font-size: 20px;
+    }
+}
+
+/* Stack layout for very narrow screens */
+@media (max-width: 1200px) {
+    .description-container {
+        left: 20px;
+        padding: 15px;
+        width: 200px;
+    }
 }
 
