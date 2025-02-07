@@ -71,6 +71,7 @@ header, .content, footer {
     padding: 20px 0;
     width: 1200px;
     flex-shrink: 0;
+    transform: translateX(400px); /* Center the first container */
 }
 
 .nav-button {
@@ -84,7 +85,7 @@ header, .content, footer {
     cursor: pointer;
     border-radius: 50%;
     font-size: 24px;
-    z-index: 100;
+    z-index: 1000; /* Increased z-index */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,14 +95,16 @@ header, .content, footer {
     min-height: 40px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     outline: none;
+    opacity: 1; /* Ensure buttons are visible */
+    pointer-events: auto; /* Ensure buttons are clickable */
 }
 
 .prev-button {
-    left: 20px;
+    left: calc(50% - 600px); /* Position relative to center */
 }
 
 .next-button {
-    right: 20px;
+    right: calc(50% - 600px); /* Position relative to center */
 }
 
 .image-container {
