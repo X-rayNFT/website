@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentIndex < containers.length - 1) {
             currentIndex++;
             content.scrollTo({
-                left: currentIndex * (600 + 20), // container width + gap
+                left: currentIndex * (400 + 40), // container width + gap
                 behavior: 'smooth'
             });
             updateNavButtons();
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentIndex > 0) {
             currentIndex--;
             content.scrollTo({
-                left: currentIndex * (600 + 20), // container width + gap
+                left: currentIndex * (400 + 40), // container width + gap
                 behavior: 'smooth'
             });
             updateNavButtons();
