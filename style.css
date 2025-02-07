@@ -59,7 +59,7 @@ header, .content, footer {
     justify-content: center;
     padding: 40px;
     margin: 20px 0;
-    overflow: visible; /* Ensure buttons are visible outside the wrapper */
+    overflow: visible;
 }
 
 .content {
@@ -67,9 +67,9 @@ header, .content, footer {
     display: flex;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    gap: 20px;
+    gap: 40px;
     padding: 20px 0;
-    width: 600px; /* Fixed width instead of max-width */
+    width: 1200px;
     flex-shrink: 0;
 }
 
@@ -79,37 +79,39 @@ header, .content, footer {
     transform: translateY(-50%);
     background: #000000;
     color: white;
-    border: none;
-    padding: 20px;
+    border: 2px solid white;
+    padding: 15px;
     cursor: pointer;
     border-radius: 50%;
-    font-size: 30px;
+    font-size: 24px;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    min-height: 50px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     outline: none;
 }
 
 .prev-button {
-    left: -60px; /* Position outside the content area */
+    left: 20px;
 }
 
 .next-button {
-    right: -60px; /* Position outside the content area */
+    right: 20px;
 }
 
 .image-container {
     position: relative;
-    min-width: 600px;
-    height: 600px;
+    min-width: 400px;
+    height: 400px;
     flex-shrink: 0;
     overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Hide scrollbar but keep functionality */
@@ -173,5 +175,12 @@ footer {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+}
+
+/* Optional: Add hover effect */
+.nav-button:hover {
+    background: #333;
+    transform: translateY(-50%) scale(1.1);
+    transition: all 0.2s ease;
 }
 
