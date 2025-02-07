@@ -96,12 +96,12 @@ footer {
 
 .xray-line {
     position: absolute;
-    bottom: 100%; /* Start aligned with the bottom of the X-ray cover */
+    bottom: 0; /* Changed from 100% to 0 for initial position */
     left: 0;
     width: 100%;
-    height: 15px; /* Adjust the thickness of the line */
-    background-color: #00ff00; /* Adjust the color as desired */
-    transition: bottom 1s ease-in-out; /* Smooth transition for movement */
-    z-index: 3; /* Ensure it stays above other content */
+    height: 15px;
+    background-color: #00ff00;
+    transition: bottom 1s ease-in-out;
+    z-index: 3;
 }
 
