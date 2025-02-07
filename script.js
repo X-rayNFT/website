@@ -33,9 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // Add at the top with other querySelector calls
+    const scrollPrompt = document.querySelector('.scroll-prompt');
+
     // Function to handle circular index
     const getCircularIndex = (index) => {
-        return ((index % containers.length) + containers.length) % containers.length;
+        if (index < 0) {
+            return containers.length - 1;
+        }
+        if (index >= containers.length) {
+            return 0;
+        }
+        return index;
     };
 
     // Function to update active container
@@ -52,10 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollToContainer = (index) => {
         const containerWidth = 400;
         const gap = 40;
-        // Calculate position to center the current container
         const scrollPosition = index * (containerWidth + gap);
+        const centerOffset = containerWidth + gap;
         
-        content.style.transform = `translateX(${-scrollPosition + 440}px)`; // 440px is the offset to center
+        // Calculate the total width of all containers
+        const totalWidth = (containers.length - 1) * (containerWidth + gap);
+        
+        if (currentIndex === 0 && index === containers.length - 1) {
+            // Going left from first to last
+            content.style.transform = `translateX(${-totalWidth + centerOffset}px)`;
+        } else if (currentIndex === containers.length - 1 && index === 0) {
+            // Going right from last to first
+            content.style.transform = `translateX(${centerOffset}px)`;
+        } else {
+            // Normal sliding
+            content.style.transform = `translateX(${-scrollPosition + centerOffset}px)`;
+        }
     };
 
     // Function to update description content
@@ -81,6 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalHeight = document.body.scrollHeight - windowHeight;
         const windowScroll = window.pageYOffset;
         const scrolled = windowScroll / totalHeight;
+
+        // Hide scroll prompt immediately when scrolling starts
+        if (scrolled > 0) {
+            scrollPrompt.classList.add('hidden');
+        } else {
+            scrollPrompt.classList.remove('hidden');
+        }
 
         // Apply effect only to the currently visible container
         const visibleContainer = containers[currentIndex];
@@ -133,18 +161,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Update navigation button click handlers
-    nextButton.addEventListener('click', () => {
-        currentIndex = getCircularIndex(currentIndex + 1);
-        scrollToContainer(currentIndex);
+    prevButton.addEventListener('click', () => {
+        const newIndex = getCircularIndex(currentIndex - 1);
+        currentIndex = newIndex;
+        scrollToContainer(newIndex);
         updateActiveContainer();
-        updateDescription(currentIndex);
+        updateDescription(newIndex);
     });
 
-    prevButton.addEventListener('click', () => {
-        currentIndex = getCircularIndex(currentIndex - 1);
-        scrollToContainer(currentIndex);
+    nextButton.addEventListener('click', () => {
+        const newIndex = getCircularIndex(currentIndex + 1);
+        currentIndex = newIndex;
+        scrollToContainer(newIndex);
         updateActiveContainer();
-        updateDescription(currentIndex);
+        updateDescription(newIndex);
     });
 
     // Initial setup
