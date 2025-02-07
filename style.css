@@ -97,9 +97,11 @@ header, .content, footer {
 }
 
 .image-container {
-    min-width: 600px; /* Force containers to be full width */
+    position: relative;
+    min-width: 600px;
     height: 600px;
     flex-shrink: 0;
+    overflow: hidden;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -142,20 +144,25 @@ header, .content, footer {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.optical-image, .xray-cover {
+.optical-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
-
-.optical-image {
+    object-fit: cover;
     z-index: 1;
 }
 
 .xray-cover {
-    background: url('images/xray-image.jpg') no-repeat center center / cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
     transition: clip-path 1s ease-in-out;
     z-index: 2;
@@ -171,7 +178,7 @@ footer {
 
 .xray-line {
     position: absolute;
-    bottom: 0; /* Changed from 100% to 0 for initial position */
+    bottom: 0;
     left: 0;
     width: 100%;
     height: 15px;
