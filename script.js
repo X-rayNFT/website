@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.style.height = `${Math.max(document.body.scrollHeight, window.innerHeight + 10)}px`;
+    
+    // Set initial position of xray line
+    const xrayLine = document.querySelector('.xray-line');
+    xrayLine.style.bottom = '0%';
 
     window.addEventListener('scroll', () => {
         const windowHeight = window.innerHeight;
@@ -15,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clipPathValue = `polygon(0 ${100 - (scrolled * 100)}%, 100% ${100 - (scrolled * 100)}%, 100% 100%, 0 100%)`;
         xrayCover.style.clipPath = clipPathValue;
 
-        // Correctly move the .xray-line to simulate the bottom-up reveal
-        // Invert the bottom property logic to move the line upwards
+        // Move the line upwards as we scroll
         const lineBottomPosition = scrolled * 100;
         xrayLine.style.bottom = `${lineBottomPosition}%`;
         console.log(`${lineBottomPosition}%`); // Debugging
