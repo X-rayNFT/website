@@ -51,13 +51,65 @@ header, .content, footer {
     color: #666;
 }
 
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+}
+
 .content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    min-height: 50vh;
-    gap: 20px; /* Add space between containers */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px 0;
+    max-width: 600px; /* Shows one image at a time */
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+.image-container {
+    min-width: 600px; /* Force containers to be full width */
+    height: 600px;
+    flex-shrink: 0;
+}
+
+/* Hide scrollbar but keep functionality */
+.content::-webkit-scrollbar {
+    display: none;
+}
+
+.content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .scroll-container {
@@ -88,13 +140,6 @@ header, .content, footer {
     font-size: 18px;
     color: #666;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.image-container {
-    position: relative;
-    width: 600px;
-    height: 600px;
-    flex-shrink: 0; /* Prevent container from shrinking */
 }
 
 .optical-image, .xray-cover {
