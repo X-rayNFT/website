@@ -76,12 +76,15 @@ header, .content, footer {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 15px;
+    padding: 15px 20px; /* Increased padding for better clickable area */
     cursor: pointer;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 24px; /* Increased font size */
     z-index: 10;
     transition: background 0.3s ease;
+    display: flex; /* Ensure button content is centered */
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-button:hover {
@@ -89,11 +92,11 @@ header, .content, footer {
 }
 
 .prev-button {
-    left: 10px;
+    left: 20px; /* Increased distance from edge */
 }
 
 .next-button {
-    right: 10px;
+    right: 20px; /* Increased distance from edge */
 }
 
 .image-container {
