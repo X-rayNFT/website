@@ -24,4 +24,38 @@ document.addEventListener('DOMContentLoaded', () => {
         xrayLine.style.bottom = `${lineBottomPosition}%`;
         console.log(`${lineBottomPosition}%`); // Debugging
     });
+
+    // Add drag scrolling functionality
+    const scrollContainers = document.querySelectorAll('.scroll-container');
+    
+    scrollContainers.forEach(container => {
+        let isDown = false;
+        let startY;
+        let scrollTop;
+
+        container.addEventListener('mousedown', (e) => {
+            isDown = true;
+            container.classList.add('active');
+            startY = e.pageY - container.offsetTop;
+            scrollTop = container.scrollTop;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.classList.remove('active');
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDown = false;
+            container.classList.remove('active');
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const y = e.pageY - container.offsetTop;
+            const walk = (y - startY) * 2; // Adjust scrolling speed
+            container.scrollTop = scrollTop - walk;
+        });
+    });
 });
