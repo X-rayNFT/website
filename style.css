@@ -1,0 +1,107 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 20vh; /* Ensure full viewport height */
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+header, .content, footer {
+    width: 100%;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* Changed from a fixed height to auto */
+    padding: 20px 20px; /* Adjust top and bottom padding as needed */
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px; /* Reduced bottom margin */
+    color: #000;
+}
+
+.hero p {
+    font-size: 24px;
+    margin-bottom: 20px; /* Reduced bottom margin if necessary */
+    color: #666;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Reduced padding to decrease whitespace */
+    min-height: 50vh; /* Optional: adjust based on your content */
+}
+
+
+.image-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    
+}
+
+.optical-image, .xray-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.optical-image {
+    z-index: 1;
+}
+
+.xray-cover {
+    background: url('images/xray-image.jpg') no-repeat center center / cover;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transition: clip-path 1s ease-in-out;
+    z-index: 2;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.xray-line {
+    position: absolute;
+    bottom: 100%; /* Start aligned with the bottom of the X-ray cover */
+    left: 0;
+    width: 100%;
+    height: 15px; /* Adjust the thickness of the line */
+    background-color: #00ff00; /* Adjust the color as desired */
+    transition: bottom 1s ease-in-out; /* Smooth transition for movement */
+    z-index: 3; /* Ensure it stays above other content */
+}
+
