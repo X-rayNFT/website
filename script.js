@@ -7,10 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to update navigation buttons
     const updateNavButtons = () => {
-        prevButton.style.display = currentIndex === 0 ? 'none' : 'flex';
-        nextButton.style.display = currentIndex === containers.length - 1 ? 'none' : 'flex';
+        // Always show next button if there are more images
+        nextButton.style.display = currentIndex >= containers.length - 1 ? 'none' : 'flex';
+        // Always show prev button if not at the start
+        prevButton.style.display = currentIndex <= 0 ? 'none' : 'flex';
+        
+        // Debug log
+        console.log('Current index:', currentIndex);
+        console.log('Prev button display:', prevButton.style.display);
+        console.log('Next button display:', nextButton.style.display);
     };
 
+    // Make sure buttons are visible initially
+    prevButton.style.display = 'flex';
+    nextButton.style.display = 'flex';
+    
     // Initial button state
     updateNavButtons();
 
