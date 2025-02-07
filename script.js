@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to update navigation buttons
     const updateNavButtons = () => {
-        // Always show both buttons unless at the ends
         nextButton.style.opacity = currentIndex >= containers.length - 1 ? '0.3' : '1';
         nextButton.style.pointerEvents = currentIndex >= containers.length - 1 ? 'none' : 'auto';
         
@@ -15,14 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
         prevButton.style.pointerEvents = currentIndex <= 0 ? 'none' : 'auto';
     };
 
+    // Function to scroll to container
+    const scrollToContainer = (index) => {
+        const containerWidth = 400; // Width of container
+        const gap = 40; // Gap between containers
+        const scrollPosition = index * (containerWidth + gap);
+        
+        content.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+    };
+
     // Navigation buttons
     nextButton.addEventListener('click', () => {
         if (currentIndex < containers.length - 1) {
             currentIndex++;
-            content.scrollTo({
-                left: currentIndex * (400 + 40) - 400, // Adjust for initial offset
-                behavior: 'smooth'
-            });
+            scrollToContainer(currentIndex);
             updateNavButtons();
         }
     });
@@ -30,25 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
     prevButton.addEventListener('click', () => {
         if (currentIndex > 0) {
             currentIndex--;
-            content.scrollTo({
-                left: currentIndex * (400 + 40) - 400, // Adjust for initial offset
-                behavior: 'smooth'
-            });
+            scrollToContainer(currentIndex);
             updateNavButtons();
         }
     });
 
-    // Initial button state
+    // Initial setup
     updateNavButtons();
-
-    // Set up scroll handling for each container
-    containers.forEach((container, index) => {
-        const xrayCover = container.querySelector('.xray-cover');
-        const xrayLine = container.querySelector('.xray-line');
-        
-        // Set initial position of xray line
-        xrayLine.style.bottom = '0%';
-    });
 
     // Scroll effect for currently visible container
     window.addEventListener('scroll', () => {
@@ -69,5 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Move the line upwards as we scroll
         const lineBottomPosition = scrolled * 100;
         xrayLine.style.bottom = `${lineBottomPosition}%`;
+    });
+
+    // Set initial position of xray lines
+    containers.forEach(container => {
+        const xrayLine = container.querySelector('.xray-line');
+        xrayLine.style.bottom = '0%';
     });
 });
